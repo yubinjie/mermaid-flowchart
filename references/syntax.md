@@ -217,10 +217,52 @@ gitGraph
 
 ## 渲染方式
 
+### 在线 / 平台内置渲染
+
 1. **在线**：https://mermaid.live（免费，所见即所得）
 2. **GitHub/GitLab**：Markdown 中直接写 ```` ```mermaid ```` 代码块
 3. **VS Code**：安装 "Mermaid Preview" 插件（bierner.markdown-mermaid）
 4. **Notion**：/mermaid 命令
 5. **飞书文档**：```mermaid 代码块
-6. **命令行导出**：`mmdc -i input.mmd -o output.png`
-7. **Python 渲染**：`pip install mermaid`（实验性）
+
+### 命令行导出 SVG（mermaid-cli / mmdc）
+
+**安装：**
+```bash
+npm install -g @mermaid-js/mermaid-cli
+```
+
+**导出 SVG（推荐，矢量无损，适合文档/PPT/论文）：**
+```bash
+# 透明背景，适合插入 PPT/网页
+mmdc -i input.mmd -o output.svg -b transparent
+
+# 白色背景，适合论文配图
+mmdc -i input.mmd -o output.svg -b white
+
+# 指定宽度 + 暗色主题
+mmdc -i input.mmd -o output.svg -w 1200 --theme dark
+```
+
+**常用参数：**
+
+| 参数 | 说明 | 示例 |
+|-----|------|------|
+| `-i` | 输入的 .mmd 文件 | `-i flow.mmd` |
+| `-o` | 输出文件 (.svg/.png/.pdf) | `-o output.svg` |
+| `-b` | 背景色 | `transparent` / `white` / `#f0f0f0` |
+| `-w` | 输出宽度（像素） | `-w 1200` |
+| `-H` | 输出高度（像素） | `-H 800` |
+| `-s` | 缩放倍率（默认 1） | `-s 2` |
+| `--theme` | 配色主题 | `default` / `forest` / `dark` / `neutral` |
+| `-p` | 自定义 puppeteer 配置 | `-p config.json` |
+
+**导出 PNG（位图，适合通用嵌入）：**
+```bash
+mmdc -i input.mmd -o output.png -b white -s 2
+```
+
+**批量导出：**
+```bash
+for f in *.mmd; do mmdc -i "$f" -o "${f%.mmd}.svg" -b transparent; done
+```

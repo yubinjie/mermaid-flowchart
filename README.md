@@ -1,6 +1,6 @@
 # mermaid-flowchart skill
 
-用自然语言描述需求，生成可直接使用的 Mermaid 代码。支持流程图、时序图、类图、状态图、甘特图、饼图等。
+用自然语言描述需求，生成 Mermaid 代码块或直接导出 .svg 矢量图。支持流程图、时序图、类图、状态图、甘特图、饼图等。输出形式由用户自选。
 
 ## 适用场景
 
@@ -17,7 +17,7 @@
 - "画一个 ORB-SLAM 的跟踪-建图-回环三条线程交互的时序图"
 - "画我论文里多传感器融合的架构图"
 
-Skill 会自动选型并生成 Mermaid 代码。
+Skill 会自动选型，询问用户选择输出形式（代码块 / .svg 文件），然后生成对应内容。
 
 ## Skill 结构
 
@@ -38,4 +38,5 @@ mermaid-flowchart/
 | VS Code | 插件 bierner.markdown-mermaid |
 | Mermaid Live | https://mermaid.live (在线) |
 | Notion | /mermaid 命令 |
-| 命令行导出 | `mmdc -i input.mmd -o output.png` |
+| 命令行导出 PNG | `mmdc -i input.mmd -o output.png` |
+| 命令行导出 SVG | `mmdc -i input.mmd -o output.svg -b transparent` |
